@@ -4,6 +4,7 @@ import usePrivyAuth from '@/hooks/use-privy-auth';
 import { GodotIframe } from '@/types/godot';
 import { usePrivy } from '@privy-io/react-auth';
 import { useEffect, useRef } from 'react';
+import { useOrientation } from 'react-use';
 
 const appUrl = process.env.NEXT_PUBLIC_APP_URL!;
 const godotVersion = process.env.NEXT_PUBLIC_GODOT_VERSION!;
@@ -15,6 +16,8 @@ export default function Home() {
   const godotRef = useRef<GodotIframe>(null);
   const { ready, login, logout } = usePrivy();
   const { accountAddress } = usePrivyAuth();
+  const { type } = useOrientation();
+  const isPortrait = type.includes('portrait');
 
   useEffect(() => {
     const godotWindow = godotRef.current?.contentWindow;
@@ -27,9 +30,19 @@ export default function Home() {
     }
   }, [accountAddress, login, logout]);
 
+  if (isPortrait) {
+    return (
+      <div className="flex h-svh items-center justify-center px-6">
+        <p className="w-[250px] text-center">
+          Hang tight — mobile version is on the way 🚀
+        </p>
+      </div>
+    );
+  }
+
   if (!ready) {
     return (
-      <div className="flex h-svh items-center justify-center">
+      <div className="flex h-svh items-center justify-center px-6">
         <p>Loading...</p>
       </div>
     );
