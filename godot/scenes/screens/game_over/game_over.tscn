@@ -1,0 +1,127 @@
+[gd_scene load_steps=5 format=3 uid="uid://bcmvrv6o6lv4i"]
+
+[ext_resource type="Script" uid="uid://c4ssop3dchxxg" path="res://scenes/screens/game_over/game_over.gd" id="1_pspwa"]
+[ext_resource type="PackedScene" uid="uid://fcdunss37aoe" path="res://scenes/backgrounds/space_background/space_background.tscn" id="3_c1oe1"]
+[ext_resource type="Theme" uid="uid://bdpci5f57k7wy" path="res://resources/themes/primary_button.tres" id="5_tfw2y"]
+
+[sub_resource type="Environment" id="Environment_wf0jh"]
+background_mode = 3
+glow_enabled = true
+glow_bloom = 0.5
+
+[node name="GameOver" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_pspwa")
+metadata/_edit_lock_ = true
+
+[node name="HTTPRequest" type="HTTPRequest" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_wf0jh")
+
+[node name="SpaceBackground" parent="." instance=ExtResource("3_c1oe1")]
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+metadata/_edit_lock_ = true
+
+[node name="SavingLabel" type="Label" parent="MarginContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "Saving..."
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+metadata/_edit_lock_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 16
+
+[node name="GameOverLabel" type="Label" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 16
+text = "Game Over"
+
+[node name="ScoreContainer" type="VBoxContainer" parent="CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="ScoreContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer/ScoreContainer"]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="CenterContainer/VBoxContainer/ScoreContainer/ScoreContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "Score:"
+
+[node name="ScoreLabel" type="Label" parent="CenterContainer/VBoxContainer/ScoreContainer/ScoreContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 10
+text = "0"
+horizontal_alignment = 2
+
+[node name="HighScoreContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer/ScoreContainer"]
+visible = false
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="CenterContainer/VBoxContainer/ScoreContainer/HighScoreContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "HIgh Score:"
+
+[node name="HighScoreLabel" type="Label" parent="CenterContainer/VBoxContainer/ScoreContainer/HighScoreContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 10
+text = "0"
+horizontal_alignment = 2
+
+[node name="MenuContainer" type="VBoxContainer" parent="CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(85, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+theme_override_constants/separation = 7
+
+[node name="RestartButton" type="Button" parent="CenterContainer/VBoxContainer/MenuContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("5_tfw2y")
+text = "Restart"
+
+[node name="MainMenuButton" type="Button" parent="CenterContainer/VBoxContainer/MenuContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("5_tfw2y")
+text = "Main Menu"

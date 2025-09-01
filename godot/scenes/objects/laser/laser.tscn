@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://c6n1xifmg7tfm"]
+
+[ext_resource type="Script" uid="uid://w57dxbamnup4" path="res://scenes/objects/laser/laser.gd" id="1_5hj26"]
+[ext_resource type="Texture2D" uid="uid://da4re4mxklxm4" path="res://assets/sprites/ship/laser_small.png" id="1_ff3fn"]
+[ext_resource type="Script" uid="uid://bfmvmwt7gqj7r" path="res://components/move_component.gd" id="2_5hj26"]
+[ext_resource type="Script" uid="uid://dlu2ei75gosxs" path="res://components/hitbox_component.gd" id="4_rxwbp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_luvoo"]
+size = Vector2(4, 8)
+
+[node name="Laser" type="Node2D"]
+script = ExtResource("1_5hj26")
+metadata/_edit_lock_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_ff3fn")
+metadata/_edit_lock_ = true
+
+[node name="MoveComponent" type="Node" parent="." node_paths=PackedStringArray("actor")]
+script = ExtResource("2_5hj26")
+actor = NodePath("..")
+velocity = Vector2(0, -200)
+metadata/_custom_type_script = "uid://bfmvmwt7gqj7r"
+
+[node name="VisibleOnScreenNotifier" type="VisibleOnScreenNotifier2D" parent="."]
+rect = Rect2(-2, -3, 4, 8)
+metadata/_edit_lock_ = true
+
+[node name="HitboxComponent" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("4_rxwbp")
+metadata/_custom_type_script = "uid://dlu2ei75gosxs"
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_luvoo")
+metadata/_edit_lock_ = true

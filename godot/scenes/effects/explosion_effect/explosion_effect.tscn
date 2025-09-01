@@ -1,0 +1,64 @@
+[gd_scene load_steps=11 format=3 uid="uid://dyi2ewp5plgba"]
+
+[ext_resource type="Texture2D" uid="uid://df0munnx7xb0s" path="res://assets/sprites/effects/explosion.png" id="1_r50yf"]
+[ext_resource type="Script" uid="uid://c8p7gob31aa4k" path="res://components/onetime_animated_effect.gd" id="2_vssgj"]
+[ext_resource type="AudioStream" uid="uid://b2nbmrpyts2fa" path="res://assets/sounds/explosion_sound.wav" id="3_qi0s0"]
+[ext_resource type="Script" uid="uid://6hxv7sjgjprn" path="res://components/variable_pitch_audio_stream_player.gd" id="4_po70t"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_obllk"]
+atlas = ExtResource("1_r50yf")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_snr4w"]
+atlas = ExtResource("1_r50yf")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mqt5h"]
+atlas = ExtResource("1_r50yf")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q6tpw"]
+atlas = ExtResource("1_r50yf")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jqn1a"]
+atlas = ExtResource("1_r50yf")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_n43pr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_obllk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_snr4w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mqt5h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q6tpw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jqn1a")
+}],
+"loop": false,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="ExplosionEffect" type="AnimatedSprite2D"]
+scale = Vector2(1.2, 1.2)
+sprite_frames = SubResource("SpriteFrames_n43pr")
+autoplay = "default"
+script = ExtResource("2_vssgj")
+metadata/_custom_type_script = "uid://c8p7gob31aa4k"
+metadata/_edit_lock_ = true
+
+[node name="ExplosionAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_qi0s0")
+bus = &"SFX"
+script = ExtResource("4_po70t")
+auto_play_with_variance = true
+metadata/_custom_type_script = "uid://6hxv7sjgjprn"

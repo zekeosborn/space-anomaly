@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://dkpcqh3sbi0v3"]
+
+[ext_resource type="Script" uid="uid://cuifp0k8hnen4" path="res://components/spawner_component.gd" id="1_fb0jn"]
+[ext_resource type="Script" uid="uid://brpta0scm1t7v" path="res://scenes/managers/enemy_manager/enemy_manager.gd" id="1_ukgtx"]
+[ext_resource type="PackedScene" uid="uid://cdpn28fxp2kms" path="res://scenes/objects/enemies/pepe_enemy/pepe_enemy.tscn" id="2_shlfx"]
+[ext_resource type="PackedScene" uid="uid://b75yakvfgj58w" path="res://scenes/objects/enemies/jar_enemy/jar_enemy.tscn" id="3_fe6cg"]
+[ext_resource type="PackedScene" uid="uid://bysh81qrf57pu" path="res://scenes/objects/enemies/scre_enemy/scre_enemy.tscn" id="4_qwmhd"]
+
+[node name="EnemyManager" type="Node"]
+script = ExtResource("1_ukgtx")
+pepe_enemy_scene = ExtResource("2_shlfx")
+jar_enemy_scene = ExtResource("3_fe6cg")
+scre_enemy_scene = ExtResource("4_qwmhd")
+
+[node name="SpawnerComponent" type="Node2D" parent="."]
+script = ExtResource("1_fb0jn")
+metadata/_custom_type_script = "uid://cuifp0k8hnen4"
+metadata/_edit_lock_ = true
+
+[node name="PepeEnemyTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+autostart = true
+
+[node name="JarEnemyTimer" type="Timer" parent="."]
+process_mode = 4
+wait_time = 5.0
+one_shot = true
+autostart = true
+
+[node name="ScreEnemyTimer" type="Timer" parent="."]
+process_mode = 4
+wait_time = 10.0
+one_shot = true
+autostart = true

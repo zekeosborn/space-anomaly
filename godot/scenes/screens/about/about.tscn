@@ -1,0 +1,118 @@
+[gd_scene load_steps=7 format=3 uid="uid://b4gwhi4ybqxx"]
+
+[ext_resource type="Script" uid="uid://87c0h5uc6vpk" path="res://scenes/screens/about/about.gd" id="1_pspwa"]
+[ext_resource type="PackedScene" uid="uid://fcdunss37aoe" path="res://scenes/backgrounds/space_background/space_background.tscn" id="3_c1oe1"]
+[ext_resource type="Theme" uid="uid://br7wuv0xnfrar" path="res://resources/themes/label_button.tres" id="4_y8paf"]
+[ext_resource type="Theme" uid="uid://b25ptn8k5n2p2" path="res://resources/themes/link_button.tres" id="6_o4sl1"]
+[ext_resource type="PackedScene" uid="uid://cucwoer7v435v" path="res://scenes/objects/ship/ship.tscn" id="7_gfiyi"]
+
+[sub_resource type="Environment" id="Environment_wf0jh"]
+background_mode = 3
+glow_enabled = true
+glow_bloom = 0.5
+
+[node name="About" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_pspwa")
+metadata/_edit_lock_ = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_wf0jh")
+
+[node name="SpaceBackground" parent="." instance=ExtResource("3_c1oe1")]
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+metadata/_edit_lock_ = true
+
+[node name="BackButton" type="Button" parent="MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme = ExtResource("4_y8paf")
+text = "Back"
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+metadata/_edit_lock_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 16
+
+[node name="BuiltByContainer" type="VBoxContainer" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="TitleLabel" type="Label" parent="CenterContainer/VBoxContainer/BuiltByContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.5137255, 0.43137255, 0.9764706, 1)
+text = "built by"
+
+[node name="ZekeosbornButton" type="Button" parent="CenterContainer/VBoxContainer/BuiltByContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("6_o4sl1")
+text = "Zeke Osborn"
+
+[node name="CreditsContainer" type="VBoxContainer" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="TitleLabel" type="Label" parent="CenterContainer/VBoxContainer/CreditsContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.5137255, 0.43137255, 0.9764706, 1)
+text = "credits"
+horizontal_alignment = 1
+
+[node name="HeartbeastButton" type="Button" parent="CenterContainer/VBoxContainer/CreditsContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("6_o4sl1")
+text = "Heartbeast"
+
+[node name="GrafxkidButton" type="Button" parent="CenterContainer/VBoxContainer/CreditsContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("6_o4sl1")
+text = "GrafxKid"
+
+[node name="KenneyButton" type="Button" parent="CenterContainer/VBoxContainer/CreditsContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("6_o4sl1")
+text = "Kenney"
+
+[node name="Ship" parent="." instance=ExtResource("7_gfiyi")]
+position = Vector2(80, 216)
+disable_control = true

@@ -1,0 +1,222 @@
+[gd_scene load_steps=28 format=3 uid="uid://cucwoer7v435v"]
+
+[ext_resource type="Script" uid="uid://kwobf5bg4pbn" path="res://scenes/objects/ship/ship.gd" id="1_4r53o"]
+[ext_resource type="Texture2D" uid="uid://db6dfn2fbaar4" path="res://assets/sprites/ship/ship.png" id="1_ne1b4"]
+[ext_resource type="AudioStream" uid="uid://j7hxv30b280m" path="res://assets/sounds/laser_sound.wav" id="2_28ldb"]
+[ext_resource type="Script" uid="uid://bfmvmwt7gqj7r" path="res://components/move_component.gd" id="2_gd045"]
+[ext_resource type="Script" uid="uid://oprtf3phtkn4" path="res://components/move_input_component.gd" id="3_ivpou"]
+[ext_resource type="Script" uid="uid://6hxv7sjgjprn" path="res://components/variable_pitch_audio_stream_player.gd" id="3_k15jc"]
+[ext_resource type="Texture2D" uid="uid://grc3mchsdc24" path="res://assets/sprites/ship/ship_flame.png" id="3_ywsw5"]
+[ext_resource type="Script" uid="uid://cc6jd4i0qft4m" path="res://components/stats_component.gd" id="4_3hlbv"]
+[ext_resource type="Script" uid="uid://de167xkl8aei4" path="res://components/position_clamp_component.gd" id="4_bnshu"]
+[ext_resource type="Script" uid="uid://cuifp0k8hnen4" path="res://components/spawner_component.gd" id="6_4lgmp"]
+[ext_resource type="Script" uid="uid://d3f77q2iudbqn" path="res://components/scale_component.gd" id="6_hl215"]
+[ext_resource type="PackedScene" uid="uid://c6n1xifmg7tfm" path="res://scenes/objects/laser/laser.tscn" id="7_touph"]
+[ext_resource type="Script" uid="uid://d2k1ofno71aej" path="res://components/hurtbox_component.gd" id="11_kfv6f"]
+[ext_resource type="Script" uid="uid://dbynovv1v2bga" path="res://components/hurt_component.gd" id="12_1pp4k"]
+[ext_resource type="PackedScene" uid="uid://dyi2ewp5plgba" path="res://scenes/effects/explosion_effect/explosion_effect.tscn" id="12_lo0vn"]
+[ext_resource type="Script" uid="uid://b8xh8kks25ikm" path="res://components/destroyed_component.gd" id="13_1pp4k"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gd045"]
+atlas = ExtResource("1_ne1b4")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ivpou"]
+atlas = ExtResource("1_ne1b4")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bnshu"]
+atlas = ExtResource("1_ne1b4")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4r53o"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gd045")
+}],
+"loop": true,
+"name": &"center",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ivpou")
+}],
+"loop": true,
+"name": &"tilt_left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bnshu")
+}],
+"loop": true,
+"name": &"tilt_right",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1wimc"]
+atlas = ExtResource("3_ywsw5")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3hlbv"]
+atlas = ExtResource("3_ywsw5")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ywsw5"]
+atlas = ExtResource("3_ywsw5")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kfv6f"]
+atlas = ExtResource("3_ywsw5")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lo0vn"]
+atlas = ExtResource("3_ywsw5")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1pp4k"]
+atlas = ExtResource("3_ywsw5")
+region = Rect2(32, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kfv6f"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1wimc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3hlbv")
+}],
+"loop": true,
+"name": &"center",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ywsw5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kfv6f")
+}],
+"loop": true,
+"name": &"tilt_left",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lo0vn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1pp4k")
+}],
+"loop": true,
+"name": &"tilt_right",
+"speed": 10.0
+}]
+
+[node name="Ship" type="Node2D"]
+script = ExtResource("1_4r53o")
+metadata/_edit_lock_ = true
+
+[node name="LaserAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_28ldb")
+bus = &"SFX"
+script = ExtResource("3_k15jc")
+metadata/_custom_type_script = "uid://6hxv7sjgjprn"
+
+[node name="Anchor" type="Node2D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="ShipAnimatedSprite" type="AnimatedSprite2D" parent="Anchor"]
+unique_name_in_owner = true
+sprite_frames = SubResource("SpriteFrames_4r53o")
+animation = &"center"
+metadata/_edit_lock_ = true
+
+[node name="FlameAnimatedSprite" type="AnimatedSprite2D" parent="Anchor"]
+unique_name_in_owner = true
+position = Vector2(0, 16)
+sprite_frames = SubResource("SpriteFrames_kfv6f")
+animation = &"center"
+metadata/_edit_lock_ = true
+
+[node name="StatsComponent" type="Node" parent="."]
+script = ExtResource("4_3hlbv")
+metadata/_custom_type_script = "uid://cc6jd4i0qft4m"
+
+[node name="MoveComponent" type="Node" parent="." node_paths=PackedStringArray("actor")]
+script = ExtResource("2_gd045")
+actor = NodePath("..")
+metadata/_custom_type_script = "uid://bfmvmwt7gqj7r"
+
+[node name="MoveInputComponent" type="Node" parent="." node_paths=PackedStringArray("move_component")]
+script = ExtResource("3_ivpou")
+move_component = NodePath("../MoveComponent")
+metadata/_custom_type_script = "uid://oprtf3phtkn4"
+
+[node name="PositionClampComponent" type="Node2D" parent="." node_paths=PackedStringArray("actor")]
+script = ExtResource("4_bnshu")
+actor = NodePath("..")
+metadata/_custom_type_script = "uid://de167xkl8aei4"
+metadata/_edit_lock_ = true
+
+[node name="ScaleComponent" type="Node" parent="." node_paths=PackedStringArray("sprite")]
+script = ExtResource("6_hl215")
+sprite = NodePath("../Anchor")
+metadata/_custom_type_script = "uid://d3f77q2iudbqn"
+
+[node name="Laser" type="Node2D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="LeftMuzzle" type="Marker2D" parent="Laser"]
+unique_name_in_owner = true
+position = Vector2(-5, -4)
+metadata/_edit_lock_ = true
+
+[node name="RightMuzzle" type="Marker2D" parent="Laser"]
+unique_name_in_owner = true
+position = Vector2(5, -4)
+metadata/_edit_lock_ = true
+
+[node name="LaserSpawner" type="Node2D" parent="Laser"]
+unique_name_in_owner = true
+script = ExtResource("6_4lgmp")
+scene = ExtResource("7_touph")
+metadata/_custom_type_script = "uid://cuifp0k8hnen4"
+metadata/_edit_lock_ = true
+
+[node name="FireTimer" type="Timer" parent="Laser"]
+unique_name_in_owner = true
+wait_time = 0.4
+one_shot = true
+
+[node name="HurtboxComponent" type="Area2D" parent="."]
+collision_mask = 0
+script = ExtResource("11_kfv6f")
+metadata/_custom_type_script = "uid://d2k1ofno71aej"
+metadata/_edit_lock_ = true
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="HurtboxComponent"]
+polygon = PackedVector2Array(-8, 4, -8, 2, -5, -1, -3, -1, -3, -4, -1, -6, -1, -7, 1, -7, 1, -6, 3, -4, 3, -1, 5, -1, 8, 2, 8, 4, 5, 4, 5, 7, -5, 7, -5, 4)
+metadata/_edit_lock_ = true
+
+[node name="HurtComponent" type="Node" parent="." node_paths=PackedStringArray("stats_component", "hurtbox_component")]
+script = ExtResource("12_1pp4k")
+stats_component = NodePath("../StatsComponent")
+hurtbox_component = NodePath("../HurtboxComponent")
+metadata/_custom_type_script = "uid://dbynovv1v2bga"
+
+[node name="ExplosionEffectSpawner" type="Node2D" parent="."]
+script = ExtResource("6_4lgmp")
+scene = ExtResource("12_lo0vn")
+metadata/_custom_type_script = "uid://cuifp0k8hnen4"
+metadata/_edit_lock_ = true
+
+[node name="DestroyedComponent" type="Node" parent="." node_paths=PackedStringArray("actor", "stats_component", "destroy_effect_spawner_component")]
+script = ExtResource("13_1pp4k")
+actor = NodePath("..")
+stats_component = NodePath("../StatsComponent")
+destroy_effect_spawner_component = NodePath("../ExplosionEffectSpawner")
+metadata/_custom_type_script = "uid://b8xh8kks25ikm"

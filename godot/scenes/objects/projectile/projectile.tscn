@@ -1,0 +1,130 @@
+[gd_scene load_steps=15 format=3 uid="uid://b3eytlcggra4u"]
+
+[ext_resource type="Script" uid="uid://bv073ut2dkr00" path="res://scenes/objects/projectile/projectile.gd" id="1_bt2wl"]
+[ext_resource type="Texture2D" uid="uid://p7ytvl4v0fgx" path="res://assets/sprites/enemy/projectile.png" id="1_tmngc"]
+[ext_resource type="Script" uid="uid://dlu2ei75gosxs" path="res://components/hitbox_component.gd" id="2_bt2wl"]
+[ext_resource type="Script" uid="uid://bfmvmwt7gqj7r" path="res://components/move_component.gd" id="3_e40jm"]
+[ext_resource type="Script" uid="uid://d3f77q2iudbqn" path="res://components/scale_component.gd" id="4_fmeg4"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ps0p8"]
+atlas = ExtResource("1_tmngc")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5th18"]
+atlas = ExtResource("1_tmngc")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yn8y7"]
+atlas = ExtResource("1_tmngc")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yjxrh"]
+atlas = ExtResource("1_tmngc")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1dupt"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ps0p8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5th18")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yn8y7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yjxrh")
+}],
+"loop": true,
+"name": &"pulsate",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_57352"]
+radius = 4.0
+
+[sub_resource type="Animation" id="Animation_ar5yc"]
+resource_name = "ocillate"
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Anchor:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(4, 0), Vector2(0, 0), Vector2(-4, 0), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_tj4vi"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Anchor:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rrgqt"]
+_data = {
+&"RESET": SubResource("Animation_tj4vi"),
+&"ocillate": SubResource("Animation_ar5yc")
+}
+
+[node name="Projectile" type="Node2D"]
+script = ExtResource("1_bt2wl")
+metadata/_edit_lock_ = true
+
+[node name="Anchor" type="Node2D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Anchor"]
+sprite_frames = SubResource("SpriteFrames_1dupt")
+animation = &"pulsate"
+autoplay = "pulsate"
+metadata/_edit_lock_ = true
+
+[node name="HitboxComponent" type="Area2D" parent="Anchor"]
+unique_name_in_owner = true
+collision_layer = 0
+script = ExtResource("2_bt2wl")
+metadata/_custom_type_script = "uid://dlu2ei75gosxs"
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Anchor/HitboxComponent"]
+shape = SubResource("CircleShape2D_57352")
+metadata/_edit_lock_ = true
+
+[node name="VisibleOnScreenNotifier" type="VisibleOnScreenNotifier2D" parent="Anchor"]
+unique_name_in_owner = true
+rect = Rect2(-4, -4, 8, 8)
+metadata/_edit_lock_ = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_rrgqt")
+}
+autoplay = "ocillate"
+
+[node name="MoveComponent" type="Node" parent="." node_paths=PackedStringArray("actor")]
+script = ExtResource("3_e40jm")
+actor = NodePath("..")
+velocity = Vector2(0, 30)
+metadata/_custom_type_script = "uid://bfmvmwt7gqj7r"
+
+[node name="ScaleComponent" type="Node" parent="." node_paths=PackedStringArray("sprite")]
+script = ExtResource("4_fmeg4")
+sprite = NodePath("../Anchor/AnimatedSprite2D")
+metadata/_custom_type_script = "uid://d3f77q2iudbqn"
