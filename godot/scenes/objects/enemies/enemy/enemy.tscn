@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dxafwh7iinlac" path="res://scenes/objects/enemies/enemy/enemy.gd" id="1_cnacv"]
 [ext_resource type="Script" uid="uid://cc6jd4i0qft4m" path="res://components/stats_component.gd" id="1_wjivm"]
-[ext_resource type="AudioStream" uid="uid://dxtfmsd6ug4pb" path="res://assets/sounds/hit_sound.wav" id="2_65cyi"]
+[ext_resource type="AudioStream" uid="uid://b36bigkdorrbu" path="res://assets/audio/hit_sfx.ogg" id="2_65cyi"]
 [ext_resource type="Script" uid="uid://bfmvmwt7gqj7r" path="res://components/move_component.gd" id="2_bt8cw"]
 [ext_resource type="Script" uid="uid://d3f77q2iudbqn" path="res://components/scale_component.gd" id="3_hmixd"]
 [ext_resource type="Script" uid="uid://6hxv7sjgjprn" path="res://components/variable_pitch_audio_stream_player.gd" id="3_uokyy"]
@@ -20,9 +20,9 @@ script = ExtResource("1_cnacv")
 
 [node name="HitAudio" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_65cyi")
-volume_db = 5.0
 bus = &"SFX"
 script = ExtResource("3_uokyy")
+pitch_min = 0.8000000000029104
 metadata/_custom_type_script = "uid://6hxv7sjgjprn"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

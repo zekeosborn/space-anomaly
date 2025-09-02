@@ -9,7 +9,10 @@ func _ready() -> void:
 	Events.score_changed.connect(_on_score_changed)
 	ship.tree_exited.connect(game_over_timer.start)
 	game_over_timer.timeout.connect(_on_game_over_timer_timeout)
+	
 	randomize()
+	MusicPlayer.menu_bgm.stop()
+	MusicPlayer.game_bgm.play()
 	Globals.reset_score()
 
 

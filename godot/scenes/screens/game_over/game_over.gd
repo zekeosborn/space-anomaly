@@ -13,6 +13,9 @@ func _ready() -> void:
 	http_request.request_completed.connect(_on_http_request_completed)
 	restart_button.pressed.connect(_on_restart_button_pressed)
 	main_menu_button.pressed.connect(_on_main_menu_button_pressed)
+	
+	MusicPlayer.game_bgm.stop()
+	MusicPlayer.menu_bgm.play()
 	score_label.text = str(Globals.score)
 	if Globals.window: _submit_score()
 

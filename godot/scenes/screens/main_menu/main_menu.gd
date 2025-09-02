@@ -18,6 +18,9 @@ func _ready() -> void:
 	log_in_button.pressed.connect(Globals.login)
 	log_out_button.pressed.connect(Globals.logout)
 	
+	if not MusicPlayer.menu_bgm.playing:
+		MusicPlayer.menu_bgm.play()
+	
 	if Globals.window:
 		Globals.reset_connection()
 	else:

@@ -1,8 +1,8 @@
 [gd_scene load_steps=11 format=3 uid="uid://dyi2ewp5plgba"]
 
 [ext_resource type="Texture2D" uid="uid://df0munnx7xb0s" path="res://assets/sprites/effects/explosion.png" id="1_r50yf"]
-[ext_resource type="Script" uid="uid://c8p7gob31aa4k" path="res://components/onetime_animated_effect.gd" id="2_vssgj"]
-[ext_resource type="AudioStream" uid="uid://b2nbmrpyts2fa" path="res://assets/sounds/explosion_sound.wav" id="3_qi0s0"]
+[ext_resource type="Script" uid="uid://ealq5o52uyf7" path="res://scenes/effects/explosion_effect/explosion_effect.gd" id="2_qi0s0"]
+[ext_resource type="AudioStream" uid="uid://dfbnq0imtdikq" path="res://assets/audio/explosion_sfx.ogg" id="3_qi0s0"]
 [ext_resource type="Script" uid="uid://6hxv7sjgjprn" path="res://components/variable_pitch_audio_stream_player.gd" id="4_po70t"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_obllk"]
@@ -52,13 +52,13 @@ animations = [{
 scale = Vector2(1.2, 1.2)
 sprite_frames = SubResource("SpriteFrames_n43pr")
 autoplay = "default"
-script = ExtResource("2_vssgj")
-metadata/_custom_type_script = "uid://c8p7gob31aa4k"
+script = ExtResource("2_qi0s0")
 metadata/_edit_lock_ = true
 
 [node name="ExplosionAudio" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_qi0s0")
 bus = &"SFX"
 script = ExtResource("4_po70t")
+pitch_min = 0.8000000000029104
 auto_play_with_variance = true
 metadata/_custom_type_script = "uid://6hxv7sjgjprn"

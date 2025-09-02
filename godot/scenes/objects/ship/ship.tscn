@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://kwobf5bg4pbn" path="res://scenes/objects/ship/ship.gd" id="1_4r53o"]
 [ext_resource type="Texture2D" uid="uid://db6dfn2fbaar4" path="res://assets/sprites/ship/ship.png" id="1_ne1b4"]
-[ext_resource type="AudioStream" uid="uid://j7hxv30b280m" path="res://assets/sounds/laser_sound.wav" id="2_28ldb"]
+[ext_resource type="AudioStream" uid="uid://bpg87jspt6oln" path="res://assets/audio/laser_sfx.ogg" id="2_28ldb"]
 [ext_resource type="Script" uid="uid://bfmvmwt7gqj7r" path="res://components/move_component.gd" id="2_gd045"]
 [ext_resource type="Script" uid="uid://oprtf3phtkn4" path="res://components/move_input_component.gd" id="3_ivpou"]
 [ext_resource type="Script" uid="uid://6hxv7sjgjprn" path="res://components/variable_pitch_audio_stream_player.gd" id="3_k15jc"]
@@ -124,6 +124,7 @@ metadata/_edit_lock_ = true
 stream = ExtResource("2_28ldb")
 bus = &"SFX"
 script = ExtResource("3_k15jc")
+pitch_min = 1.1999999999970896
 metadata/_custom_type_script = "uid://6hxv7sjgjprn"
 
 [node name="Anchor" type="Node2D" parent="."]
