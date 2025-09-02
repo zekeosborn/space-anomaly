@@ -1,6 +1,7 @@
 extends Node
 
-var window: JavaScriptObject
+var window: JavaScriptObject = null
+var account_address: Variant = null
 
 var _score: int = 0
 var score: int:
@@ -17,18 +18,19 @@ func _ready() -> void:
 	window = JavaScriptBridge.get_interface("window")
 
 
-func watch_connection(
-	on_connect: Callable,
-	on_disconnect: Callable,
-	on_bypass: Callable
-) -> void:
-	if window:
-		if window.accountAddress != null:
+func watch_connection(on_connect: Callable, on_disconnect: Callable) -> void:
+	if not window: return
+	var new_address = window.accountAddress
+	if new_address != account_address:
+		account_address = new_address
+		if account_address:
 			on_connect.call()
 		else:
 			on_disconnect.call()
-	else:
-		on_bypass.call()
+
+
+func reset_connection() -> void:
+	account_address = null
 
 
 func login() -> void:

@@ -1,12 +1,12 @@
 extends Control
 
 @onready var menu_container: CenterContainer = $MenuContainer
-@onready var log_in_container: CenterContainer = $LogInContainer
 @onready var play_button: Button = %PlayButton
 @onready var leaderboard_button: Button = %LeaderboardButton
 @onready var about_button: Button = %AboutButton
-@onready var log_in_button: Button = %LogInButton
 @onready var log_out_button: Button = %LogOutButton
+@onready var log_in_container: CenterContainer = $LogInContainer
+@onready var log_in_button: Button = %LogInButton
 
 var leaderboard_link: String = "https://monad-games-id-site.vercel.app/leaderboard?page=1&gameId=248&sortBy=scores"
 
@@ -17,10 +17,15 @@ func _ready() -> void:
 	about_button.pressed.connect(_on_about_button_pressed)
 	log_in_button.pressed.connect(Globals.login)
 	log_out_button.pressed.connect(Globals.logout)
+	
+	if Globals.window:
+		Globals.reset_connection()
+	else:
+		_show_menu()
 
 
 func _process(delta: float) -> void:
-	Globals.watch_connection(_show_menu, _show_login, _show_menu)
+	Globals.watch_connection(_show_menu, _show_login)
 
 
 func _on_play_button_pressed() -> void:
