@@ -1,3 +1,3 @@
 extends Node
 
-signal score_changed(new_score: int)
+signal score_changed(score: int)

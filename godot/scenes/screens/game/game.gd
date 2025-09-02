@@ -17,5 +17,5 @@ func _on_game_over_timer_timeout() -> void:
 	get_tree().change_scene_to_file("res://scenes/screens/game_over/game_over.tscn")
 
 
-func _on_score_changed(new_score: int) -> void:
-	score_label.text = str(new_score)
+func _on_score_changed(score: int) -> void:
+	score_label.text = str(score)
