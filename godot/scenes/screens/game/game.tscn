@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://6vrxcecprr4f"]
+[gd_scene load_steps=7 format=3 uid="uid://6vrxcecprr4f"]
 
 [ext_resource type="PackedScene" uid="uid://cucwoer7v435v" path="res://scenes/objects/ship/ship.tscn" id="1_cplvf"]
 [ext_resource type="Script" uid="uid://bwesfwhe2i5it" path="res://scenes/screens/game/game.gd" id="1_gyque"]
 [ext_resource type="PackedScene" uid="uid://fcdunss37aoe" path="res://scenes/backgrounds/space_background/space_background.tscn" id="1_okj30"]
 [ext_resource type="PackedScene" uid="uid://dkpcqh3sbi0v3" path="res://scenes/managers/enemy_manager/enemy_manager.tscn" id="3_0j7s4"]
+[ext_resource type="PackedScene" uid="uid://dvx22ex7u3a2j" path="res://scenes/ui/control_guide/control_guide.tscn" id="4_2tqw5"]
 
 [sub_resource type="Environment" id="Environment_okj30"]
 background_mode = 3
@@ -42,6 +43,23 @@ text = "0"
 
 [node name="GameOverTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="Background" type="Node2D" parent="." groups=["background_layer"]]
+metadata/_edit_lock_ = true
+
+[node name="ControlGuide" parent="Background" instance=ExtResource("4_2tqw5")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 47.0
+offset_top = 97.0
+offset_right = 113.0
+offset_bottom = 120.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_lock_ = true
 
 [node name="Entities" type="Node2D" parent="." groups=["entities_layer"]]
 metadata/_edit_lock_ = true

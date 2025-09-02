@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://dvx22ex7u3a2j"]
+
+[ext_resource type="Script" uid="uid://okins00hti1o" path="res://scenes/ui/control_guide/control_guide.gd" id="1_nt51i"]
+
+[node name="ControlGuide" type="Label"]
+offset_right = 40.0
+offset_bottom = 10.0
+text = "Move: A D / <- ->
+FIRE LASER: SPACE"
+horizontal_alignment = 1
+script = ExtResource("1_nt51i")
+metadata/_edit_lock_ = true
+
+[node name="VisibleOnScreenNotifier" type="VisibleOnScreenNotifier2D" parent="."]
+rect = Rect2(0, 0, 72, 23)
+metadata/_edit_lock_ = true

@@ -37,6 +37,7 @@ window/stretch/aspect="keep_width"
 [global_group]
 
 entities_layer=""
+background_layer=""
 
 [gui]
 
