@@ -113,6 +113,20 @@ size_flags_horizontal = 4
 theme = ExtResource("6_o4sl1")
 text = "Kenney"
 
+[node name="TallbeardStudiosButton" type="Button" parent="CenterContainer/VBoxContainer/CreditsContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("6_o4sl1")
+text = "Tallbeard Studios"
+
+[node name="KronbitsButton" type="Button" parent="CenterContainer/VBoxContainer/CreditsContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("6_o4sl1")
+text = "KronBits"
+
 [node name="Ship" parent="." instance=ExtResource("7_gfiyi")]
 position = Vector2(80, 216)
 disable_control = true
